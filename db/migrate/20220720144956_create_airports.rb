@@ -3,9 +3,10 @@ class CreateAirports < ActiveRecord::Migration[7.0]
     create_table :airports do |t|
       t.string :code
       t.string :city
-      t.string :state
+      t.string :name
 
       t.timestamps
     end
+    add_index :airports, :code, unique: true
   end
 end

@@ -1,76 +1,25 @@
 class FlightsController < ApplicationController
-  before_action :set_flight, only: %i[ show edit update destroy ]
-
-  # GET /flights or /flights.json
   def index
-    @flights = Flight.all
-    @date_options = @flights.map{ |f| [ f.date.to_fs(:rfc822), f.date ] }.uniq
-    @airports = Airport.all.map { |a| [a.code, a.city, a.state, a.id]}
-
-    @available_flights = Flight.where(depature_airport_id: params[:depature_airport_id],
-                                      arrival_airport_id: params[:arrival_airport_id],
-                                      date: params[:date])
-  end
-
-  # GET /flights/1 or /flights/1.json
-  def show
-  end
-
-  # GET /flights/new
-  def new
-    @flight = Flight.new
-  end
-
-  # GET /flights/1/edit
-  def edit
-  end
-
-  # POST /flights or /flights.json
-  def create
-    @flight = Flight.new(flight_params)
-
-    respond_to do |format|
-      if @flight.save
-        format.html { redirect_to flight_url(@flight), notice: "Flight was successfully created." }
-        format.json { render :show, status: :created, location: @flight }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @flight.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /flights/1 or /flights/1.json
-  def update
-    respond_to do |format|
-      if @flight.update(flight_params)
-        format.html { redirect_to flight_url(@flight), notice: "Flight was successfully updated." }
-        format.json { render :show, status: :ok, location: @flight }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @flight.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /flights/1 or /flights/1.json
-  def destroy
-    @flight.destroy
-
-    respond_to do |format|
-      format.html { redirect_to flights_url, notice: "Flight was successfully destroyed." }
-      format.json { head :no_content }
+    @flight = params[:flight] ? Flight.new(search_params) : Flight.new
+    if params[:flight]
+      # removes fields user did not select (e.g. origin: '')
+      params[:flight].delete_if { |_k, v| v.empty? }
+      @flights = (params[:flight].empty? ? Flight.all : Flight.where(flight_params)).includes(:origin, :destination).order(:date, :time).limit(1000)
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_flight
-      @flight = Flight.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def flight_params
-      params.require(:flight).permit(:date, :depature_airport_id, :arrival_airport_id, :passengers)
-    end
+  # search_params is designed to build the Flight object that will populate the search params
+  # on a redirect after a search (it includes :tickets which is not in the db table)
+
+  # flight_params is used to query the database
+
+  def flight_params
+    params.require(:flight).permit(:origin_id, :destination_id, :date)
+  end
+
+  def search_params
+    params.require(:flight).permit(:origin_id, :destination_id, :date, :tickets)
+  end
 end

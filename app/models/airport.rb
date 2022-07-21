@@ -5,20 +5,22 @@
 #  id         :bigint           not null, primary key
 #  city       :string
 #  code       :string
-#  state      :string
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_airports_on_code  (code) UNIQUE
+#
 class Airport < ApplicationRecord
-  has_many :arriving_flights, class_name: 'Flight', foreign_key: "arrival_airport_id"
-  has_many :departing_flights, class_name: 'Flight', foreign_key: "depature_airport_id"
+  has_many :departing_flights,
+    class_name: :Flight,
+    foreign_key: :origin_id,
+    dependent: :destroy
 
-  def arrival_airports
-    result =[]
-    arr = self.departing_flights
-    arr.each do |f|
-      result.push(f.arrival_airport)
-    end
-    result
-  end
+  has_many :arriving_flights,
+    class_name: :Flight,
+    foreign_key: :destination_id,
+    dependent: :destroy
 end

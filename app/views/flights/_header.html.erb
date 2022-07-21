@@ -1,8 +1,15 @@
 <div class="container">
   <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-      <span class="navbar-brand mb-0 h1"><%= link_to "Home", flights_path, class: "nav-link" %></span>
-      <span class="navbar-brand mb-0 h1"><%= link_to "Bookings", search_bookings_path, class: "nav-link" %></span>
+      <span class="navbar-brand mb-0 h1">
+        <%= link_to "Home", root_path, class: "nav-link" %>
+      </span>
+      <span class="navbar-brand mb-0 h1">
+        <%= link_to "Flights", flights_path, class: "nav-link" %>
+      </span>
+      <span class="navbar-brand mb-0 h1">
+        <%= link_to "Bookings", search_bookings_path, class: "nav-link" %>
+      </span>
     </div>
   </nav>
 </div>

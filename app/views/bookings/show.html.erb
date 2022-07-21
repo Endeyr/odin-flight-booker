@@ -1,7 +1,21 @@
-<p style="color: green"><%= notice %></p>
+<br>
+<br>
 
-<h2>Your Order</h2>
-<% @booking.passengers.each do | p |%>
-  <%= render @booking.flight, passenger: p%>
+<%= render 'flights/flight', flight: @booking.flight %>
+<h3 id='confirmation-display'>Confirmation Number: <%= @booking.confirmation %></h3>
+
+<% @booking.passengers.each do |passenger| %>
+  <span><%= @booking.flight.origin.code %></span>
+  <span><%= @booking.flight.destination.code %></span>
+  <div><%= passenger.formatted_name_short %></div>
+  <div><%= @booking.flight.formatted_flight_number %></div>
+  <div><%= @booking.flight.origin.code %></div>
+  <div><%= @booking.flight.destination.code %></div>
+  <div><%= passenger.formatted_name_long %></div>
+  <div><%= @booking.flight.formatted_flight_number %></div>
+  <div><%= @booking.flight.boarding_time %></div>
+  <div><%= @booking.flight.formatted_time %></div>
+  <div><%= @booking.flight.boarding_time %></div>
+  <div><%= @booking.flight.formatted_time %></div>
 <% end %>
-<%= button_to "Book another flight", flights_path, method: :get %>
+

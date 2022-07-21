@@ -366,7 +366,7 @@ DEPENDENCIES
   shoulda-context
   shoulda-matchers
   sidekiq
-  simple_form
+  simple_form (~> 5.0, >= 5.0.3)
   sprockets-rails (~> 3.4, >= 3.4.2)
   stimulus-rails
   turbo-rails

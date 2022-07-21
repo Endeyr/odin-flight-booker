@@ -3,17 +3,28 @@
 # Table name: passengers
 #
 #  id         :bigint           not null, primary key
-#  email      :string
-#  name       :string
+#  email      :string           not null
+#  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_passengers_on_email  (email) UNIQUE
+#
 class Passenger < ApplicationRecord
-  validates :name, presence: true
-  validates :name, length: { minimum: 2 }
-
-  validates :email, presence: true
-
-  has_and_belongs_to_many :bookings
+  has_many :passenger_bookings, dependent: :delete_all
+  has_many :bookings, through: :passenger_bookings, inverse_of: :passengers
   has_many :flights, through: :bookings
+
+  validates :name, :email, presence: true
+  validates :email, uniqueness: true, if: -> { !email.blank? }
+
+  def formatted_name_long
+    name.slice(0, 23).upcase
+  end
+
+  def formatted_name_short
+    name.length < 16 ? name.upcase : name.slice(0, 18)
+  end
 end

@@ -1,36 +1,23 @@
-<% if request.path.include?('/bookings/') && !request.path.include?('/bookings/new')%>
-  <%= passenger.name %>
-<% end %>
-<% if flights %>
-  <table>
-    <thead>
-      <tr>
-        <th>Flight Code</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Date</th>
-        <th>Departs</th>
-        <th>Arrives</th>
-        <th>Departure Time</th>
-        <th>Duration</th>
-        <th>Price</th>
-      </tr>
-    </thead>
+<table>
+  <thead>
+    <tr>
+      <th>Flight #</th>
+      <th>Departs</th>
+      <th>Arrives</th>
+      <th>Date</th>
+      <th>Departure</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
 
-    <tbody>
-      <% flights.each do |flight| %>
-        <tr>
-          <td><%= flight.flight_code %></td>
-          <td><%= flight.flight_city %></td>
-          <td><%= flight.flight_state %></td>
-          <td><%= flight.date.strftime('%d.%m.%y') %></td>
-          <td><%= flight.depature_airport.code %></td>
-          <td><%= flight.arrival_airport.code %></td>
-          <td><%= flight.time %></td>
-          <td><%= flight.duration %></td>
-          <td><%= flight.price %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+  <tbody>
+    <tr>
+      <td><%= flight.formatted_flight_number %></td>
+      <td><%= flight.origin.code %></td>
+      <td><%= flight.destination.code %></td>
+      <td><%= flight.formatted_date %></td>
+      <td><%= flight.formatted_time %></td>
+      <td><%= flight.formatted_duration %></td>
+    </tr>
+  </tbody>
+</table>

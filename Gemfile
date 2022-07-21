@@ -15,7 +15,7 @@ gem "rails", "~> 7.0.3"
 gem "sprockets-rails", '~> 3.4', '>= 3.4.2'
 gem "stimulus-rails"
 gem "turbo-rails"
-gem 'simple_form'
+gem 'simple_form', '~> 5.0', '>= 5.0.3'
 gem 'bootstrap', '~> 5.2'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 gem 'jquery-rails', '~> 4.5'

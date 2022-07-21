@@ -2,16 +2,25 @@
 #
 # Table name: flights
 #
-#  id                  :bigint           not null, primary key
-#  date                :date
-#  duration            :string
-#  flight_code         :string
-#  price               :float
-#  time                :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  arrival_airport_id  :integer
-#  depature_airport_id :integer
+#  id             :bigint           not null, primary key
+#  date           :date             not null
+#  duration       :integer          not null
+#  flight_number  :integer          default(-1), not null
+#  time           :time             not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  destination_id :bigint           not null
+#  origin_id      :bigint           not null
+#
+# Indexes
+#
+#  index_flights_on_destination_id  (destination_id)
+#  index_flights_on_origin_id       (origin_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (destination_id => airports.id)
+#  fk_rails_...  (origin_id => airports.id)
 #
 require "test_helper"
 

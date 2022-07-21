@@ -1,5 +1,9 @@
 class AddColumnCodeToFlight < ActiveRecord::Migration[7.0]
   def change
-    add_column :flights, :flight_code, :string
+    add_column :flights, :flight_number, :integer, null: false, default: -1
+
+    Flight.all.each do |flight|
+      flight.reset_flight_number!
+    end
   end
 end
