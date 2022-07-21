@@ -2,17 +2,4 @@
 
 <%= render "form", flights: @flights %>
 
-<%='invisible' if !params.has_key?(:depature_airport_id) %>">
-<% if !@available_flights.empty?  %>
-<h2>Flights from <i><%= @available_flights.first.depature_airport.code %></i> to <i><%= @available_flights.first.arrival_airport.code %></i>
-</h2>
-<p> On <i><%= @available_flights.first.date %></i>
-</p>
-<% @available_flights.each do |flight| %>
-  <%= link_to new_booking_path(flight_id: flight.id, passengers_num: params[:passengers], date: Date.new) do%>
-    <%= render flight %>
-  <% end %>
-<% end %>
-<% else %>
-  <h2>No Flights available</h2>
-<% end %>
+
