@@ -9,6 +9,7 @@ require 'faker'
 
 # generate 20 airports
 Flight.destroy_all
+Airport.destroy_all
 
 Airport.create(code: 'NYC', city: 'New York City', state: 'New York')
 Airport.create(code: 'AUS', city: 'Autsin', state: 'Texas')

@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   resources :orders
-  resources :passengers
-  resources :bookings
+  resources :bookings, only: [:new, :create, :show, :index] do
+    get 'search', on: :collection
+  end
   resources :airports
-  resources :flights
+  resources :flights, only: :index
   get 'find_order', :to => 'orders#find_order'
   post :create_order, :to => 'orders#create_order'
   post :capture_order, :to => 'orders#capture_order'
