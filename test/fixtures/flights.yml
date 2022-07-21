@@ -1,0 +1,25 @@
+# == Schema Information
+#
+# Table name: flights
+#
+#  id                  :bigint           not null, primary key
+#  date                :date
+#  duration            :string
+#  flight_code         :string
+#  price               :float
+#  time                :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  arrival_airport_id  :integer
+#  depature_airport_id :integer
+#
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one: {}
+# column: value
+#
+two: {}
+# column: value

@@ -12,9 +12,14 @@ gem "pgcli-rails"
 gem "puma", "~> 5.0"
 gem "rack-canonical-host"
 gem "rails", "~> 7.0.3"
-gem "sprockets-rails"
+gem "sprockets-rails", '~> 3.4', '>= 3.4.2'
 gem "stimulus-rails"
 gem "turbo-rails"
+gem 'simple_form'
+gem 'bootstrap', '~> 5.2'
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem 'jquery-rails', '~> 4.5'
+# gem 'ransack', :github => 'activerecord-hackery/ransack', :branch => 'main'
 
 group :production do
   gem "postmark-rails"
@@ -32,7 +37,9 @@ group :development do
   gem "rubocop-minitest", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
+  gem 'rubocop-faker', '~> 1.1', require: false
   gem "web-console"
+  gem 'better_errors', '~> 2.9', '>= 2.9.1'
 end
 
 group :development, :test do

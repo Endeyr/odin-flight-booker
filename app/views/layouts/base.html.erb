@@ -17,10 +17,12 @@
 
     <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= javascript_importmap_tags %>
     <%= yield(:head) %>  </head>
-
   <body>
+    <%= render "header" %>
     <%= yield %>
+    <%= render "footer" %>
   </body>
 </html>

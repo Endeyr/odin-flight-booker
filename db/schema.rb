@@ -10,8 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_20_143509) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_21_135521) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "airports", force: :cascade do |t|
+    t.string "code"
+    t.string "city"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "passenger_id"
+    t.integer "flight_id"
+  end
+
+  create_table "bookings_passengers", id: false, force: :cascade do |t|
+    t.bigint "passenger_id", null: false
+    t.bigint "booking_id", null: false
+  end
+
+  create_table "flights", force: :cascade do |t|
+    t.date "date"
+    t.string "duration"
+    t.string "time"
+    t.float "price"
+    t.integer "depature_airport_id"
+    t.integer "arrival_airport_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "flight_code"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.boolean "paid", default: false
+    t.string "token"
+    t.float "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "passengers", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

@@ -1,0 +1,14 @@
+<%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'dropdown' }, wrapper_mappings: {
+    check_boxes:    :vertical_collection,
+    radio_buttons:  :vertical_collection,
+    file:           :custom_file,
+    boolean:        :custom_boolean_switch
+  } do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :departure_airport_id, collection: @airports, input_html: {value: ""} %>
+  <%= f.input :arrival_airport_id, collection: @airports, input_html: { value: ""} %>
+  <%= f.input :passengers, collection: 1..4, input_html: {value: ""} %>
+  <%= f.input :date, as: :date, @date_options %>
+  <br>
+  <%= f.submit "Search", class: "btn btn-primary" %>
+<% end %>

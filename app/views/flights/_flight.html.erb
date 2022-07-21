@@ -1,0 +1,14 @@
+<div id="<%= dom_id flight %>" class="flight">
+<% if request.path.include?('/bookings/') && !request.path.include?('/bookings/new')%>
+  <%= passenger.name %>
+<% end %>
+
+<%= flight.flight_code %>
+<%= flight.flight_city %>
+<%= flight.flight_state %>
+<%= flight.date.strftime('%d.%m.%y') %>
+<%= flight.depature_airport.code %>
+<%= flight.arrival_airport.code %>
+<%= flight.time %>
+<%= flight.duration %>
+<%= flight.price %>

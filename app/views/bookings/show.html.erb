@@ -1,0 +1,7 @@
+<p style="color: green"><%= notice %></p>
+
+<h2>Your Order</h2>
+<% @booking.passengers.each do | p |%>
+  <%= render @booking.flight, passenger: p%>
+<% end %>
+<%= button_to "Book another flight", flights_path, method: :get %>
